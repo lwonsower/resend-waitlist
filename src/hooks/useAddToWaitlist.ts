@@ -4,6 +4,7 @@ import { parseName } from '../utils';
 import { useRateLimiter } from './useRateLimiter';
 
 // This hook makes requests to the resend API using values in the config file
+// Add REACT_APP_RESEND_API_KEY and REACT_APP_RESEND_AUDIENCE_ID to .env.local to test locally
 // https://resend.com/docs/api-reference/introduction
 export function useAddToWaitlist() {
     const apiKey = process.env.REACT_APP_RESEND_API_KEY;
@@ -32,8 +33,10 @@ export function useAddToWaitlist() {
                     })
                 });
 
-                if (response?.ok) {
-                    setError(new Error(`HTTP error! status: ${response.status}`));
+                if (!response?.ok) {
+                    response.text().then(text => {
+                        setError(new Error(JSON.parse(text).message));
+                    });
                 }
                 const json = await response.json();
                 setData(json);

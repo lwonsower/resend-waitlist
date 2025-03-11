@@ -35,8 +35,7 @@ export default [
             file: 'dist/index.d.ts',
             format: 'es',
         },
-        external: ['react', 'react-dom'],
+        external: ['react', 'react-dom', /\.css$/],
         plugins: [dts()],
-        external: [/\.css$/],
     },
 ];

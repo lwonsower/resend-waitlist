@@ -7,10 +7,10 @@ import { Mail, SendHorizonal, User } from 'lucide-react';
 import classNames from 'classnames';
 import { getTheme } from '../../utils';
 
-type Waitlist = {
+type WaitlistType = {
     handleError?: (v: Error) => void;
-    variant?: 'light' | 'dark'
-}
+    variant?: 'light' | 'dark';
+};
 
 export type WaitlistFormData = {
     name: string;
@@ -18,10 +18,11 @@ export type WaitlistFormData = {
     honeypot: string;
 };
 
-function Waitlist({ handleError, variant }: Waitlist) {
-    const { handleSubmit, formState, register, reset } = useForm<WaitlistFormData>({
-        mode: 'onBlur'
-    });
+function Waitlist({ handleError, variant }: WaitlistType) {
+    const { handleSubmit, formState, register, reset } =
+        useForm<WaitlistFormData>({
+            mode: 'onBlur'
+        });
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const { error, loading, postAddToWaitlist } = useAddToWaitlist();
@@ -31,7 +32,7 @@ function Waitlist({ handleError, variant }: Waitlist) {
             // Using a simple honeypot to avoid spam here.
             // Recaptcha is a more comprehensive and accessible solution but requires a more detailed setup
             if (handleError) {
-                handleError(new Error('spam detected'))
+                handleError(new Error('spam detected'));
             }
         } else {
             let response;
@@ -43,18 +44,21 @@ function Waitlist({ handleError, variant }: Waitlist) {
                 setShowSuccessModal(true);
                 reset();
             } else {
-                setShowErrorModal(true)
+                console.log({ error })
+                setShowErrorModal(true);
             }
         }
     };
 
     return (
-        <div className={classNames("Container", `Container-${getTheme(variant)}`)}>
+        <div className={classNames('Container', `Container-${getTheme(variant)}`)}>
             <h2 className="Header">Join the Waitlist</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="Form">
                 <div className="Inputs">
                     <div className="Honeypot-Input">
-                        <label htmlFor="honeypot">Anti-spam measure. Don't fill this out if you're human:</label>
+                        <label htmlFor="honeypot">
+                            Anti-spam measure. Don&apos;t fill this out if you&apos;re human:
+                        </label>
                         <input {...register('honeypot')} type="text" name="honeypot" />
                     </div>
                     <div className="Input">
@@ -66,7 +70,9 @@ function Waitlist({ handleError, variant }: Waitlist) {
                             placeholder="Enter your name"
                         />
                     </div>
-                    <div className="Error">{formState.errors?.name && 'Name is required'}</div>
+                    <div className="Error">
+                        {formState.errors?.name && 'Name is required'}
+                    </div>
                     <div className="Input">
                         <Mail className="InputIcon" />
                         <input
@@ -74,8 +80,8 @@ function Waitlist({ handleError, variant }: Waitlist) {
                                 required: true,
                                 pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: 'Invalid email address',
-                                },
+                                    message: 'Invalid email address'
+                                }
                             })}
                             type="email"
                             aria-label="Enter your email"
@@ -83,10 +89,9 @@ function Waitlist({ handleError, variant }: Waitlist) {
                         />
                     </div>
                     <div className="Error">
-                        {!!formState.errors?.email ?
-                            (formState.errors?.email.message || 'Email is required')
-                            : ''
-                        }
+                        {formState.errors?.email
+                            ? formState.errors?.email.message || 'Email is required'
+                            : ''}
                     </div>
                 </div>
                 <button type="submit" disabled={!formState.isValid} className="Button">
@@ -96,29 +101,31 @@ function Waitlist({ handleError, variant }: Waitlist) {
             <Modal
                 isOpen={showSuccessModal}
                 onClose={() => setShowSuccessModal(false)}
-                children={
-                    <div className="Modal-Content">
-                        <div className="SendHorizonalIcon"><SendHorizonal /></div>
-                        <h3>Thank you</h3>
-                        You've been added to the waitlist!
-                        <button className="Button" onClick={() => setShowSuccessModal(false)}>Close</button>
+            >
+                <div className="Modal-Content">
+                    <div className="SendHorizonalIcon">
+                        <SendHorizonal />
                     </div>
-                }
-            />
-            <Modal
-                isOpen={showErrorModal}
-                onClose={() => setShowErrorModal(false)}
-                children={
-                    <div className="Modal-Content">
-                        <h3>Oh no!</h3>
-                        <p className="Modal-Error">
-                            An error has occurred<br />
-                            {error?.message}
-                        </p>
-                        <button className="Button" onClick={() => setShowErrorModal(false)}>Close</button>
-                    </div>
-                }
-            />
+                    <h3>Thank you</h3>
+                    You&apos;ve been added to the waitlist!
+                    <button className="Button" onClick={() => setShowSuccessModal(false)}>
+                        Close
+                    </button>
+                </div>
+            </Modal>
+            <Modal isOpen={showErrorModal} onClose={() => setShowErrorModal(false)}>
+                <div className="Modal-Content">
+                    <h3>Oh no!</h3>
+                    <p className="Modal-Error">
+                        An error has occurred
+                        <br />
+                        {error?.message}
+                    </p>
+                    <button className="Button" onClick={() => setShowErrorModal(false)}>
+                        Close
+                    </button>
+                </div>
+            </Modal>
         </div>
     );
 }
