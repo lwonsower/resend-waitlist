@@ -1,7 +1,7 @@
 ## Resend Waitlist
 ### Allow users to add themselves to your waitlist with this convenient React component
 
-This package uses the Resend API [Resend API](https://resend.com/docs)
+This package uses the [Resend API](https://resend.com/docs)
 
 #### Instructions
 1. Create or Login to your [Resend account](https://www.resend.com)
@@ -14,13 +14,11 @@ Your `.env.local` should look something like this:
 ```
 REACT_APP_RESEND_API_KEY={your-api-key}
 REACT_APP_RESEND_AUDIENCE_ID={your-audience-id}
-
 ```
 
 3. Install the package 
 ```
 npm install @lwonsower/resend-waitlist@1.1.4
-
 ```
 
 4. Now you can use the waitlist in your react app

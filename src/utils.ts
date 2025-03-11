@@ -11,7 +11,7 @@ const parseName = (name: string) => {
 }
 
 // Sets color theme to passed variant, defaults to window settings if no variant is passed
-const getTheme = (variant?: 'light' | 'dark') => variant || window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ? 'dark' : 'light';
+const getTheme = (variant?: 'light' | 'dark') => variant || (window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ? 'dark' : 'light');
 
 export {
     getTheme,

@@ -44,7 +44,6 @@ function Waitlist({ handleError, variant }: WaitlistType) {
                 setShowSuccessModal(true);
                 reset();
             } else {
-                console.log({ error })
                 setShowErrorModal(true);
             }
         }
