@@ -13,12 +13,7 @@ export default [
                 dir: "dist",
                 format: "cjs",
                 sourcemap: true,
-            },
-            {
-                dir: "dist",
-                format: "esm",
-                sourcemap: true,
-            },
+            }
         ],
         plugins: [
             resolve(),
