@@ -4,7 +4,7 @@
     "registry": "https://npm.pkg.github.com/lwonsower"
   },
   "repository": "https://github.com/lwonsower/resend-waitlist",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A react waitlist component that uses the resend API",
   "scripts": {
     "rollup": "rollup -c"
@@ -25,6 +25,8 @@
     "@types/react-dom": "^19.0.4",
     "classnames": "^2.5.1",
     "lucide-react": "^0.479.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
     "rollup": "^4.35.0",
     "rollup-plugin-dts": "^6.1.1",
