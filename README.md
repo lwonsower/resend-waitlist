@@ -18,7 +18,7 @@ REACT_APP_RESEND_AUDIENCE_ID={your-audience-id}
 
 3. Install the package 
 ```
-npm install @lwonsower/resend-waitlist@1.1.5
+npm install @lwonsower/resend-waitlist@1.1.6
 ```
 
 4. Now you can use the waitlist in your react app
