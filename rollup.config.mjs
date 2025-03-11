@@ -10,14 +10,7 @@ export default [
         input: "src/index.ts",
         output: [
             {
-                dir: "dist",
-                entryFileNames: 'index.js',
-                format: "cjs",
-                sourcemap: true,
-            },
-            {
                 dir: `dist`,
-                entryFileNames: 'index.mjs',
                 format: 'esm',
                 sourcemap: true,
             }
@@ -34,8 +27,11 @@ export default [
         ],
     },
     {
-        input: "dist/index.d.ts",
-        output: { file: "dist/types/index.d.ts", format: "esm" },
+        input: 'src/index.ts',
+        output: {
+            file: 'dist/index.d.ts',
+            format: 'es',
+        },
         plugins: [dts()],
         external: [/\.css$/],
     },
