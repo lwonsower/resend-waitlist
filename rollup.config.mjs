@@ -15,6 +15,7 @@ export default [
                 sourcemap: true,
             }
         ],
+        external: ['react', 'react-dom'],
         plugins: [
             resolve(),
             commonjs(),
@@ -32,6 +33,7 @@ export default [
             file: 'dist/index.d.ts',
             format: 'es',
         },
+        external: ['react', 'react-dom'],
         plugins: [dts()],
         external: [/\.css$/],
     },
